@@ -1,0 +1,161 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Linux服务部署 | Hexo</title><meta name="keywords" content="Linux服务部署"><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="1.安装jdk 2.更改配置 vi &#x2F;etc&#x2F;profile 3.shell脚本执行jar包，并创建out输出文本查看程序执行情况（程序控制台） 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux服务部署">
+<meta property="og:url" content="https://github.com/1487473163/gpblog.git/2022/04/12/Linux%E6%9C%8D%E5%8A%A1%E9%83%A8%E7%BD%B2/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1.安装jdk 2.更改配置 vi &#x2F;etc&#x2F;profile 3.shell脚本执行jar包，并创建out输出文本查看程序执行情况（程序控制台） 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://github.com/1487473163/gpblog.git/img/linux_service.jpg">
+<meta property="article:published_time" content="2022-04-12T08:38:10.000Z">
+<meta property="article:modified_time" content="2022-04-12T08:45:21.770Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Linux服务部署">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/1487473163/gpblog.git/img/linux_service.jpg"><link rel="shortcut icon" href="/gpblog/img/head.jpg"><link rel="canonical" href="https://github.com/1487473163/gpblog.git/2022/04/12/Linux%E6%9C%8D%E5%8A%A1%E9%83%A8%E7%BD%B2/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/gpblog/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/gpblog/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Linux服务部署',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2022-04-12 16:45:21'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.0.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">Loading...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/gpblog/img/head.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/gpblog/archives/"><div class="headline">Articles</div><div class="length-num">11</div></a></div><div class="data-item"><a href="/gpblog/tags/"><div class="headline">Tags</div><div class="length-num">11</div></a></div><div class="data-item"><a href="/gpblog/categories/"><div class="headline">Categories</div><div class="length-num">11</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/gpblog/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/gpblog/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/gpblog/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/gpblog/link/"><i class="fa-fw fas fa-link"></i><span> 外链</span></a></div><div class="menus_item"><a class="site-page" href="/gpblog/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/gpblog/img/linux_service.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/gpblog/">Hexo</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/gpblog/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/gpblog/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/gpblog/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/gpblog/link/"><i class="fa-fw fas fa-link"></i><span> 外链</span></a></div><div class="menus_item"><a class="site-page" href="/gpblog/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Linux服务部署</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2022-04-12T08:38:10.000Z" title="Created 2022-04-12 16:38:10">2022-04-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2022-04-12T08:45:21.770Z" title="Updated 2022-04-12 16:45:21">2022-04-12</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/gpblog/categories/Linux%E6%9C%8D%E5%8A%A1%E9%83%A8%E7%BD%B2/">Linux服务部署</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Linux服务部署"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>1.安装jdk</p>
+<p>2.更改配置 vi &#x2F;etc&#x2F;profile</p>
+<p>3.shell脚本执行jar包，并创建out输出文本查看程序执行情况（程序控制台）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="language-bash">spring boot Jar包目录</span></span><br><span class="line">APP_NAME=/data/sftp/sftp-web-0.0.1-SNAPSHOT.jar</span><br><span class="line"><span class="meta">#</span><span class="language-bash">使用说明，用来提示输入参数</span></span><br><span class="line">usage() &#123;</span><br><span class="line">    echo &quot;Usage: sh sftp-web.sh [start|stop|restart|status]&quot;</span><br><span class="line">    exit 1</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta"> </span></span><br><span class="line"><span class="meta">#</span><span class="language-bash">检查程序是否在运行</span></span><br><span class="line">is_exist()&#123;</span><br><span class="line">  pid=`ps -ef|grep $APP_NAME|grep -v grep|awk &#x27;&#123;print $2&#125;&#x27;`</span><br><span class="line"><span class="meta">  #</span><span class="language-bash">如果不存在返回1，存在返回0</span>     </span><br><span class="line">  if [ -z &quot;$&#123;pid&#125;&quot; ]; then</span><br><span class="line">   return 1</span><br><span class="line">  else</span><br><span class="line">    return 0</span><br><span class="line">  fi</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta"> </span></span><br><span class="line"><span class="meta">#</span><span class="language-bash">启动方法</span></span><br><span class="line">start()&#123;</span><br><span class="line">  is_exist</span><br><span class="line">  if [ $? -eq 0 ]; then</span><br><span class="line">    echo &quot;$&#123;APP_NAME&#125; is already running. pid=$&#123;pid&#125;&quot;</span><br><span class="line">  else</span><br><span class="line"><span class="meta">  	#</span><span class="language-bash">这个dontKillMe 是一定要加的，不然jenkins会杀死这个进程，导致服务退出</span></span><br><span class="line">  	BUILD_ID=dontKillMe</span><br><span class="line"><span class="meta">  	#</span><span class="language-bash">将日志输出到threat-web.out，自己命名</span></span><br><span class="line">    nohup java  -Xms512m -Xmx1024m  -jar $&#123;APP_NAME&#125;  &gt;sftp-web.out 2&gt;&amp;1 &amp;</span><br><span class="line">  fi</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta"> </span></span><br><span class="line"><span class="meta">#</span><span class="language-bash">停止方法</span></span><br><span class="line">stop()&#123;</span><br><span class="line">  is_exist</span><br><span class="line">  if [ $? -eq &quot;0&quot; ]; then</span><br><span class="line">    kill -9 $pid</span><br><span class="line">  else</span><br><span class="line">    echo &quot;$&#123;APP_NAME&#125; is not running&quot;</span><br><span class="line">  fi  </span><br><span class="line">&#125;</span><br><span class="line"><span class="meta"> </span></span><br><span class="line"><span class="meta">#</span><span class="language-bash">输出运行状态</span></span><br><span class="line">status()&#123;</span><br><span class="line">  is_exist</span><br><span class="line">  if [ $? -eq &quot;0&quot; ]; then</span><br><span class="line">    echo &quot;$&#123;APP_NAME&#125; is running. Pid is $&#123;pid&#125;&quot;</span><br><span class="line">  else</span><br><span class="line">    echo &quot;$&#123;APP_NAME&#125; is NOT running.&quot;</span><br><span class="line">  fi</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta"> </span></span><br><span class="line"><span class="meta">#</span><span class="language-bash">重启</span></span><br><span class="line">restart()&#123;</span><br><span class="line">  stop</span><br><span class="line">  sleep 5</span><br><span class="line">  start</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta"> </span></span><br><span class="line"><span class="meta">#</span><span class="language-bash">根据输入参数，选择执行对应方法，不输入则执行使用说明</span></span><br><span class="line">case &quot;$1&quot; in</span><br><span class="line">  &quot;start&quot;)</span><br><span class="line">    start</span><br><span class="line">    ;;</span><br><span class="line">  &quot;stop&quot;)</span><br><span class="line">    stop</span><br><span class="line">    ;;</span><br><span class="line">  &quot;status&quot;)</span><br><span class="line">    status</span><br><span class="line">    ;;</span><br><span class="line">  &quot;restart&quot;)</span><br><span class="line">    restart</span><br><span class="line">    ;;</span><br><span class="line">  *)</span><br><span class="line">    usage</span><br><span class="line">    ;;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">John Doe</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://github.com/1487473163/gpblog.git/2022/04/12/Linux%E6%9C%8D%E5%8A%A1%E9%83%A8%E7%BD%B2/">https://github.com/1487473163/gpblog.git/2022/04/12/Linux%E6%9C%8D%E5%8A%A1%E9%83%A8%E7%BD%B2/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/gpblog/tags/Linux%E6%9C%8D%E5%8A%A1%E9%83%A8%E7%BD%B2/">Linux服务部署</a></div><div class="post_share"><div class="social-share" data-image="/gpblog/img/linux_service.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/gpblog/2022/03/29/SFTP%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E4%B8%8E%E4%B8%8A%E4%BC%A0/"><img class="next-cover" src="/gpblog/img/sftp.png" onerror="onerror=null;src='/gpblog/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">SFTP服务器搭建与上传</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/gpblog/img/head.jpg" onerror="this.onerror=null;this.src='/gpblog/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">John Doe</div><div class="author-info__description"></div></div><div class="card-info-data is-center"><div class="card-info-data-item"><a href="/gpblog/archives/"><div class="headline">Articles</div><div class="length-num">11</div></a></div><div class="card-info-data-item"><a href="/gpblog/tags/"><div class="headline">Tags</div><div class="length-num">11</div></a></div><div class="card-info-data-item"><a href="/gpblog/categories/"><div class="headline">Categories</div><div class="length-num">11</div></a></div></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">Welcome to Wlr's Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/gpblog/2022/04/12/Linux%E6%9C%8D%E5%8A%A1%E9%83%A8%E7%BD%B2/" title="Linux服务部署"><img src="/gpblog/img/linux_service.jpg" onerror="this.onerror=null;this.src='/gpblog/img/404.jpg'" alt="Linux服务部署"/></a><div class="content"><a class="title" href="/gpblog/2022/04/12/Linux%E6%9C%8D%E5%8A%A1%E9%83%A8%E7%BD%B2/" title="Linux服务部署">Linux服务部署</a><time datetime="2022-04-12T08:38:10.000Z" title="Created 2022-04-12 16:38:10">2022-04-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/gpblog/2022/03/29/SFTP%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E4%B8%8E%E4%B8%8A%E4%BC%A0/" title="SFTP服务器搭建与上传"><img src="/gpblog/img/sftp.png" onerror="this.onerror=null;this.src='/gpblog/img/404.jpg'" alt="SFTP服务器搭建与上传"/></a><div class="content"><a class="title" href="/gpblog/2022/03/29/SFTP%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E4%B8%8E%E4%B8%8A%E4%BC%A0/" title="SFTP服务器搭建与上传">SFTP服务器搭建与上传</a><time datetime="2022-03-29T07:46:04.000Z" title="Created 2022-03-29 15:46:04">2022-03-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/gpblog/2022/03/24/ES%20SQL%E6%9F%A5%E8%AF%A2%E4%B8%8E%E5%AF%BC%E5%87%BA%E5%85%A8%E9%83%A8/" title="ES SQL查询与导出全部"><img src="/gpblog/img/es_search.webp" onerror="this.onerror=null;this.src='/gpblog/img/404.jpg'" alt="ES SQL查询与导出全部"/></a><div class="content"><a class="title" href="/gpblog/2022/03/24/ES%20SQL%E6%9F%A5%E8%AF%A2%E4%B8%8E%E5%AF%BC%E5%87%BA%E5%85%A8%E9%83%A8/" title="ES SQL查询与导出全部">ES SQL查询与导出全部</a><time datetime="2022-03-24T09:05:41.000Z" title="Created 2022-03-24 17:05:41">2022-03-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/gpblog/2022/03/17/HTTP%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BF%9E%E6%8E%A5%E7%AC%94%E8%AE%B0/" title="HTTP客户端连接笔记"><img src="/gpblog/img/http.webp" onerror="this.onerror=null;this.src='/gpblog/img/404.jpg'" alt="HTTP客户端连接笔记"/></a><div class="content"><a class="title" href="/gpblog/2022/03/17/HTTP%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BF%9E%E6%8E%A5%E7%AC%94%E8%AE%B0/" title="HTTP客户端连接笔记">HTTP客户端连接笔记</a><time datetime="2022-03-17T15:40:55.000Z" title="Created 2022-03-17 23:40:55">2022-03-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/gpblog/2022/03/08/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AC%94%E8%AE%B0/" title="设计模式笔记"><img src="/gpblog/img/designMode.jfif" onerror="this.onerror=null;this.src='/gpblog/img/404.jpg'" alt="设计模式笔记"/></a><div class="content"><a class="title" href="/gpblog/2022/03/08/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AC%94%E8%AE%B0/" title="设计模式笔记">设计模式笔记</a><time datetime="2022-03-08T14:20:55.000Z" title="Created 2022-03-08 22:20:55">2022-03-08</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/gpblog/img/linux_service.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2022 By John Doe</div><div class="footer_custom_text">Welcome to HustleLr's Blog</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/gpblog/js/utils.js"></script><script src="/gpblog/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="true"></script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-show-text.min.js" data-mobile="false" data-text="有,志,者,事,竟,成" data-fontsize="15px" data-random="false" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
